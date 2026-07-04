@@ -1,0 +1,139 @@
+@import url('https://googleapis.com');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 0.5rem;
+    margin: 0;
+    position: fixed; /* Fija el elemento en la pantalla */
+    top: 0;          /* Lo posiciona al inicio superior */
+    left: 0;         /* Lo alinea a la izquierda */
+    z-index: 1000;   /* Asegura que quede por encima del contenido */
+    background-color:#4c1616;
+}
+body {
+    background-color:#4c1616;
+    color: salmon; 
+    overflow-x: hidden; /* Evita el scroll horizontal real */
+}
+.nav {
+    display:flex;
+    justify-content: left;
+    align-items: left;
+    width: 100%;
+    padding: 0;
+}
+.lista-nav {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    width: 100%;
+    gap: 1rem;
+    list-style: none;
+    background-color:#4c1616;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 25px;
+}
+.item-nav {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 7rem;
+    height: 1.5rem;
+}
+.item-nav a {
+    display: block;
+    color: salmon;
+    text-decoration: none;
+    padding: 0.25rem;
+    border-radius: 5px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.item-nav a:hover {
+    background-color:#673737;
+    transform: scale(1.05); 
+    box-shadow: 0 8px 32px #0000006b;
+}
+.logo img {
+    width: 100px;
+    height: 100px;
+}
+.card {
+    margin: 0rem;
+    padding: 0rem;
+    font-size: 0.75rem;
+    border: 5px solid salmon;
+    height: 800px;
+}
+.card.card1 {
+    text-align: right;
+}
+.card.imagen {
+    display: flex;
+    text-align: center;
+}
+.card.imagen img {
+    display: flex;
+    justify-content: right;
+    width: 100px;
+    height: 100px;
+}
+.text-h1 {
+    font-family: 'Playfair Display', italic;
+    font-style: italic;
+}
+.text {
+    font-family: 'Monserrat', italic;
+}
+
+.pie-pagina {
+    clear: both;   
+    display: flex;
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center;     /* Centra el texto verticalmente */
+    padding: 20px;
+    margin-top: 25px;        /* Separa el pie de página de los contenedores de arriba */
+    width: 100%;
+    flex-basis: 100%;        /* OBLIGA a Flexbox a darle una línea exclusiva al footer */
+    box-sizing: border-box;
+    
+    /* Mantiene tu estética de cristal opaco oscuro */
+    background-color: rgba(40, 15, 15, 0.6); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Borde superior sutil para dar volumen */
+    border-top: 1px solid rgba(235, 140, 140, 0.18);
+    border-radius: 5px 5px 25px 25px; 
+}
+
+/* Estilos para el texto interno */
+.pie-pagina p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos específicos para el enlace de GitHub Pages */
+.pie-pagina a {
+    color: #ff9900;          /* Un color llamativo que contraste bien */
+    text-decoration: none;   /* Quita el subrayado por defecto */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse por encima del enlace */
+.pie-pagina a:hover {
+    color: #ffbd2e;          /* Cambia a un tono más claro en hover (similar al botón de Mac) */
+    text-decoration: underline; /* Aparece el subrayado solo al pasar el cursor */
+}
