@@ -145,7 +145,7 @@ body {
     justify-content: center;
     align-items: center;
     /* Color de texto y un fondo semi-transparente para mejorar la lectura */
-    color: white;
+    color: rgb(255, 220, 167);
     background-color: rgba(0, 0, 0, 0.4); 
     padding: 20px;
     text-align: center;
