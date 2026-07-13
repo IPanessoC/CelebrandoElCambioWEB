@@ -157,13 +157,62 @@ body {
     display: flex;
     text-align: center;
 }
-.card.imagen img {
+.imagen img {
     display: flex;
     justify-content: right;
     width: 100px;
     height: 100px;
 }
 
+.card-mixta {
+    background-image: url('assets/img/6UpScaled.jpeg'); /* Cambia por la imagen que prefieras */
+    background-size: cover;
+    background-position: center;
+    padding: 0 !important; /* Forzamos a quitar el padding para que el overlay cubra todo */
+}
+.contenido-card-der {
+    display: flex;
+    flex-direction: row;     /* Alinea imagen y texto de lado a lado */
+    align-items: flex-start;     /* Ubica a la derecha de la imagen el texto */
+    justify-content: center; /* Centra todo el bloque en el medio de la tarjeta */
+    gap: 3rem;               /* Separación de espacio entre la imagen y el texto */
+    max-width: 1000px;        /* Evita que el texto se estire demasiado en pantallas gigantes */
+    padding: 2rem;
+}
+.contenido-card-izq {
+    display: flex;
+    flex-direction: row-reverse;      /* Invierte el orden horizontal (Texto a la izquierda, Imagen a la derecha) */
+    align-items: flex-start;     /* Ubica a la derecha de la imagen el texto */
+    justify-content: flex-start; /* Mantiene el bloque alineado al inicio izquierdo de la tarjeta */
+    gap: 3rem;               /* Separación de espacio entre la imagen y el texto */
+    max-width: 1000px;        /* Evita que el texto se estire demasiado en pantallas gigantes */
+    padding: 2rem;
+}
+.img-circular {
+    width: 300px;            /* Tamaño fijo de ancho */
+    height: 300px;           /* Tamaño fijo de alto (debe ser idéntico al ancho) */
+    border-radius: 50%;      /* El valor mágico del 50% la transforma en círculo */
+    object-fit: cover;       /* Evita que el logo o foto se aplaste dentro del círculo */
+    border: 4px solid salmon;/* Añade un borde elegante que combina con tu estética */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Le da profundidad */
+    flex-shrink: 0;          /* Evita que el texto aplaste o reduzca el tamaño de la imagen */
+}
+.text-img {
+    display: flex;
+    flex-direction: column;  /* El título arriba y el párrafo abajo */
+    gap: 1.5rem;
+    text-align: left;        /* Alineación del texto a la izquierda para un look profesional */
+    color: #ffffff;
+}
+.lista-p {
+    display: flex;
+    flex-direction: column;  /* Apila un párrafo debajo del otro */
+    gap: 1rem;               /* Espacio de separación entre cada párrafo individual */
+    font-family: 'Montserrat', sans-serif;
+}
+.lista-p p {
+    margin: 0;               /* Resetea márgenes nativos para controlar el diseño con el gap */
+}
 
 .text-nav {
     display: flex;
@@ -190,7 +239,7 @@ body {
     justify-content: center; /* Centra el texto horizontalmente */
     align-items: center;     /* Centra el texto verticalmente */
     padding: 20px;
-    margin-top: 25px;        /* Separa el pie de página de los contenedores de arriba */
+    margin-top: 5px;        /* Separa el pie de página de los contenedores de arriba */
     width: 100%;
     flex-basis: 100%;        /* OBLIGA a Flexbox a darle una línea exclusiva al footer */
     box-sizing: border-box;
