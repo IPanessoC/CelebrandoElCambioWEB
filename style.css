@@ -126,6 +126,9 @@ body {
     /* Ubica ambos elementos exactamente en la misma celda */
     grid-column: 1;
     grid-row: 1;
+    background-color: rgba(131, 42, 42, 0.2); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
 }
 .card-img {
     display:flex;
