@@ -196,51 +196,55 @@ body {
 .card-carrusel {
     position: relative !important;
     padding: 0 !important;
-    overflow: hidden !important; /* Esconde las sub-tarjetas que están en fila esperando su turno */
+    overflow: hidden !important; /* Esconde las sub-tarjetas que están en fila */
     display: flex !important;
     align-items: center;
     justify-content: center;
     background-color: rgba(40, 15, 15, 0.2);
+    height: 800px; /* ¡Añadimos la altura explícita aquí para que no colapse! */
+    width: 100%;
 }
 
 /* --- LA TIRA HORIZONTAL (EL TRACK) --- */
 .carrusel-track {
     display: flex;
     flex-direction: row;
-    width: 400%; /* Medirá el 400% porque almacena 4 tarjetas del 100% de ancho cada una */
+    width: 400%; /* 4 tarjetas del 100% de ancho cada una */
     height: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Desplazamiento ultra suave */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
 
 /* --- CADA SUB-TARJETA INDIVIDUAL (Ocupa el tamaño completo de la pantalla) --- */
 .sub-card-mixta {
-    width: 25%; /* Cada sub-tarjeta toma exactamente el ancho de la ventana visible */
+    width: 25%; /* Cada sub-tarjeta toma el 25% del track (es decir, el 100% del viewport de la tarjeta padre) */
     height: 100%;
     display: flex;
-    flex-direction: row; /* Diseño Lado a Lado en escritorio */
+    flex-direction: row; /* Diseño Lado a Lado */
     align-items: center;
+    justify-content: center;
     box-sizing: border-box;
     flex-shrink: 0;
 }
 
 /* MITAD IZQUIERDA: Bloque para la imagen cuadrada */
 .bloque-img-cuadrada {
-    width: 50% !important; /* Exactamente la mitad del ancho */
+    width: 50% !important; /* Mantiene la mitad del ancho */
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem; /* Espacio para que la imagen se reduzca y se vea cuadrada */
+    padding: 2rem; /* Reducimos ligeramente el padding para dar más espacio */
     box-sizing: border-box;
 }
 
 .bloque-img-cuadrada img {
-    width: 500px; /* Tamaño fijo para forzar la geometría cuadrada */
-    height: 500px; /* Al ser igual al ancho, es un cuadrado perfecto */
-    object-fit: cover; /* Recorta la foto proporcionalmente dentro del cuadrado */
-    border-radius: 15px; /* Bordes suaves estéticos */
-    border: 4px solid salmon;
+    width: 100%;             /* Se adapta al ancho disponible de su columna */
+    max-width: 450px;        /* Evita que se haga gigante en pantallas enormes */
+    aspect-ratio: 1 / 1;     /* FUERZA a que sea un cuadrado perfecto de forma responsiva */
+    object-fit: cover;       /* Recorta la foto de forma estética */
+    border-radius: 15px; 
+    border: 0px solid salmon;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
@@ -248,7 +252,7 @@ body {
 .bloque-texto-sub {
     width: 50% !important; /* La otra mitad del ancho */
     height: 100%;
-    padding: 5rem;
+    padding: 3rem; /* Reducimos el padding de 5rem a 3rem para evitar que se comprima el texto */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -263,9 +267,9 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(76, 22, 22, 0.9);
+    background-color: rgba(76, 22, 22, 0);
     color: salmon;
-    border: 2px solid salmon;
+    border: 0px solid salmon;
     font-size: 2rem;
     padding: 0.6rem 1.1rem;
     cursor: pointer;
@@ -276,7 +280,7 @@ body {
 }
 
 .card-carrusel .flecha-carrusel:hover {
-    background-color: #673737;
+    background-color: #67373700;
     transform: translateY(-50%) scale(1.1);
 }
 
