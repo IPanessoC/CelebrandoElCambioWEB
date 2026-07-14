@@ -252,7 +252,7 @@ body {
 .bloque-texto-sub {
     width: 50% !important; /* La otra mitad del ancho */
     height: 100%;
-    padding: 3rem; /* Reducimos el padding de 5rem a 3rem para evitar que se comprima el texto */
+    padding: 5rem; /* Reducimos el padding de 5rem a 3rem para evitar que se comprima el texto */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -284,8 +284,8 @@ body {
     transform: translateY(-50%) scale(1.1);
 }
 
-.card-carrusel .flecha-carrusel.prev { left: 30px; }
-.card-carrusel .flecha-carrusel.next { right: 30px; }
+.card-carrusel .flecha-carrusel.prev { left: 20px; }
+.card-carrusel .flecha-carrusel.next { right: 20px; }
 
 /* --- RESPONSIVE PARA MÓVILES --- */
 @media (max-width: 992px) {
