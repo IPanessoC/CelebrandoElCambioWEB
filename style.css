@@ -92,7 +92,7 @@ body {
     margin: 0 auto;
     padding: 0rem;
     font-size: 0.75rem;
-    border: 5px solid salmon;
+    border: 0px solid salmon;
     height: 800px;
     width: 100%;
 }
@@ -191,12 +191,125 @@ body {
     max-width: 1000px;        /* Evita que el texto se estire demasiado en pantallas gigantes */
     padding: 2rem;
 }
+
+/* --- LA TARJETA PADRE (VENTANA FIJA) --- */
+.card-carrusel {
+    position: relative !important;
+    padding: 0 !important;
+    overflow: hidden !important; /* Esconde las sub-tarjetas que están en fila esperando su turno */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(40, 15, 15, 0.2);
+}
+
+/* --- LA TIRA HORIZONTAL (EL TRACK) --- */
+.carrusel-track {
+    display: flex;
+    flex-direction: row;
+    width: 400%; /* Medirá el 400% porque almacena 4 tarjetas del 100% de ancho cada una */
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Desplazamiento ultra suave */
+    will-change: transform;
+}
+
+/* --- CADA SUB-TARJETA INDIVIDUAL (Ocupa el tamaño completo de la pantalla) --- */
+.sub-card-mixta {
+    width: 25%; /* Cada sub-tarjeta toma exactamente el ancho de la ventana visible */
+    height: 100%;
+    display: flex;
+    flex-direction: row; /* Diseño Lado a Lado en escritorio */
+    align-items: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+/* MITAD IZQUIERDA: Bloque para la imagen cuadrada */
+.bloque-img-cuadrada {
+    width: 50% !important; /* Exactamente la mitad del ancho */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem; /* Espacio para que la imagen se reduzca y se vea cuadrada */
+    box-sizing: border-box;
+}
+
+.bloque-img-cuadrada img {
+    width: 500px; /* Tamaño fijo para forzar la geometría cuadrada */
+    height: 500px; /* Al ser igual al ancho, es un cuadrado perfecto */
+    object-fit: cover; /* Recorta la foto proporcionalmente dentro del cuadrado */
+    border-radius: 15px; /* Bordes suaves estéticos */
+    border: 4px solid salmon;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* MITAD DERECHA: Bloque de Texto */
+.bloque-texto-sub {
+    width: 50% !important; /* La otra mitad del ancho */
+    height: 100%;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: left;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* --- FLECHAS FLOTANTES (IZQUIERDA Y DERECHA) --- */
+.card-carrusel .flecha-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(76, 22, 22, 0.9);
+    color: salmon;
+    border: 2px solid salmon;
+    font-size: 2rem;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.card-carrusel .flecha-carrusel:hover {
+    background-color: #673737;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.card-carrusel .flecha-carrusel.prev { left: 30px; }
+.card-carrusel .flecha-carrusel.next { right: 30px; }
+
+/* --- RESPONSIVE PARA MÓVILES --- */
+@media (max-width: 992px) {
+    .sub-card-mixta {
+        flex-direction: column !important; /* Se apila verticalmente en celulares */
+    }
+    .bloque-img-cuadrada, .bloque-texto-sub {
+        width: 100% !important;
+        height: 50% !important;
+    }
+    .bloque-img-cuadrada { padding: 1.5rem; }
+    .bloque-img-cuadrada img {
+        width: 280px; /* Cuadrado más pequeño adaptable a celulares */
+        height: 280px;
+    }
+    .bloque-texto-sub { padding: 2rem; text-align: center; }
+    .card-carrusel-completo .flecha-carrusel { font-size: 1.5rem; padding: 0.4rem 0.8rem; }
+    .card-carrusel-completo .flecha-carrusel.prev { left: 15px; }
+    .card-carrusel-completo .flecha-carrusel.next { right: 15px; }
+}
+
+
 .img-circular {
     width: 300px;            /* Tamaño fijo de ancho */
     height: 300px;           /* Tamaño fijo de alto (debe ser idéntico al ancho) */
     border-radius: 50%;      /* El valor mágico del 50% la transforma en círculo */
     object-fit: cover;       /* Evita que el logo o foto se aplaste dentro del círculo */
-    border: 4px solid salmon;/* Añade un borde elegante que combina con tu estética */
+    border: 0px solid salmon;/* Añade un borde elegante que combina con tu estética */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Le da profundidad */
     flex-shrink: 0;          /* Evita que el texto aplaste o reduzca el tamaño de la imagen */
 }

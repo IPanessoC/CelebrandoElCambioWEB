@@ -2,7 +2,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', (event) => {
     
-    // ==================== ANIMACIÓN DE LAS TARJETAS ====================
+    // ==================== ANIMACIÓN DE LAS TARJETAS (GSAP) ====================
     const cards = document.querySelectorAll('.card');
 
     cards.forEach((card, index) => {
@@ -21,33 +21,65 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
     
-    // ==================== ANIMACIÓN DE LAS IMÁGENES CIRCULARES ====================
-    // Seleccionamos todas las imágenes circulares de la página
+    // ==================== ANIMACIÓN DE LAS IMÁGENES CIRCULARES (GSAP) ====================
     const imagenesCirculares = document.querySelectorAll('.img-circular');
 
     imagenesCirculares.forEach((img, index) => {
         const numeroImagen = index + 1;
-
-        // Opción A: Buscamos la tarjeta contenedora más cercana automáticamente
         const tarjetaContenedora = img.closest('.card'); 
 
-        // Alternativa Opción B: Si prefieres usar clases estrictas (.card1, .card2), descomenta la línea de abajo:
-        // const tarjetaContenedora = `.card${numeroImagen}`;
-
         gsap.from(img, {
-            scale: 0,               // Inicia invisible
-            rotation: (numeroImagen % 2 === 0 ? 180 : -180), // ¡NUEVO!: Las pares giran a la derecha, las impares a la izquierda
+            scale: 0,               
+            rotation: (numeroImagen % 2 === 0 ? 180 : -180), 
             opacity: 0,             
             duration: 1.5,          
             ease: "back.out(1.7)",  
             scrollTrigger: {
-                trigger: tarjetaContenedora, // Se dispara cuando SU propia tarjeta entra en pantalla
-                start: "top 75%",            // Un poco antes de que la tarjeta suba por completo
-                toggleActions: "play none none none" // Se ejecuta al entrar
+                trigger: tarjetaContenedora, 
+                start: "top 75%",            
+                toggleActions: "play none none none" 
             }
         });
     });
+
+    // ==================== CONTROL DEL CARRUSEL EN PORCENTAJES (CORREGIDO) ====================
+    const track = document.getElementById('carrusel-track');
+    const btnPrev = document.getElementById('btn-galeria-prev');
+    const btnNext = document.getElementById('btn-galeria-next');
+    
+    const subCards = document.querySelectorAll('.sub-card-mixta');
+    const totalSubCards = subCards.length;
+    
+    if (track && btnPrev && btnNext && totalSubCards > 0) {
+        let posicionActual = 0; 
+
+        function actualizarCarrusel() {
+            // CORRECCIÓN MATEMÁTICA: Como el track mide 400%, cada tarjeta mide el 25% de la tira completa.
+            // Al multiplicar la posición actual por -25%, el carrusel avanza exactamente una tarjeta a la vez de forma perfecta.
+            const porcentajeDesplazamiento = posicionActual * 25;
+            track.style.transform = `translateX(-${porcentajeDesplazamiento}%)`;
+        }
+
+        btnNext.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            if (posicionActual < totalSubCards - 1) {
+                posicionActual++; 
+            } else {
+                posicionActual = 0; 
+            }
+            actualizarCarrusel();
+        });
+
+        btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            if (posicionActual > 0) {
+                posicionActual--; 
+            } else {
+                posicionActual = totalSubCards - 1; 
+            }
+            actualizarCarrusel();
+        });
+
+        window.addEventListener('resize', actualizarCarrusel);
+    }
 });
-
-
-
