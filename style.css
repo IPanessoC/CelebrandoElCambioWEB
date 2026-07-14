@@ -21,6 +21,11 @@ header {
     background-color: #4c1616;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.42);
     height: 110px;
+    transition: transform 0.4s ease-in-out;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
 }
 
 body {
@@ -72,14 +77,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 7rem;
+    height: 7rem;
 }
 
 .item-nav a {
     display: block;
     color: salmon;
     text-decoration: none;
-    padding: 0.8rem 1.5rem; /* Relleno limpio y simétrico */
-    border-radius: 20px;
+    padding: 3rem; /* Relleno limpio y simétrico */
+    border-radius: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
@@ -270,7 +277,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(250, 128, 114, 0.3);
+    background-color: rgba(250, 128, 114, 0);
     color: white;
     border: none;
     font-size: 2rem;
@@ -286,7 +293,7 @@ body {
 }
 
 .carousel-btn:hover {
-    background-color: rgba(250, 128, 114, 0.8);
+    background-color: rgba(250, 128, 114, 0.252);
     transform: translateY(-50%) scale(1.1);
 }
 

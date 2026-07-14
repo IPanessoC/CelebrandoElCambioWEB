@@ -116,4 +116,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (slides.length > 0) {
         startAutoSlide();
     }
+    // ==================== EFECTO: OCULTAR/MOSTRAR HEADER AL HACER SCROLL ====================
+    let lastScrollY = window.scrollY;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        // Si hacemos scroll hacia abajo y hemos pasado la altura del header (110px)
+        if (currentScrollY > lastScrollY && currentScrollY > 110) {
+            header.classList.add('header-hidden');
+        } 
+        // Si hacemos scroll hacia arriba
+        else {
+            header.classList.remove('header-hidden');
+        }
+
+        // Actualizamos la última posición del scroll
+        lastScrollY = currentScrollY;
+    });
 });
