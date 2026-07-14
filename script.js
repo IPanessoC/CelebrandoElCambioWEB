@@ -1,12 +1,11 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    
     // ==================== ANIMACIÓN DE LAS TARJETAS (GSAP) ====================
     const cards = document.querySelectorAll('.card');
 
     cards.forEach((card, index) => {
-        const numeroTarjeta = index + 1; 
+        const numeroTarjeta = index + 1;
 
         gsap.from(`.card${numeroTarjeta}`, {
             y: 30,
@@ -20,20 +19,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     });
-    
-    // ==================== ANIMACIÓN DE LAS IMÁGENES CIRCULARES (GSAP) ====================
+
+    // ==================== ANIMACIÓN DE LAS IMÁGENES CIRCULARES ====================
     const imagenesCirculares = document.querySelectorAll('.img-circular');
 
     imagenesCirculares.forEach((img, index) => {
         const numeroImagen = index + 1;
-        const tarjetaContenedora = img.closest('.card'); 
+        const tarjetaContenedora = img.closest('.card');
 
         gsap.from(img, {
             scale: 0,               
             rotation: (numeroImagen % 2 === 0 ? 180 : -180), 
-            opacity: 0,             
-            duration: 1.5,          
-            ease: "back.out(1.7)",  
+            opacity: 0,
+            duration: 1.5,
+            ease: "back.out(1.7)",
             scrollTrigger: {
                 trigger: tarjetaContenedora, 
                 start: "top 75%",            
@@ -42,44 +41,79 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    // ==================== CONTROL DEL CARRUSEL EN PORCENTAJES (CORREGIDO) ====================
-    const track = document.getElementById('carrusel-track');
-    const btnPrev = document.getElementById('btn-galeria-prev');
-    const btnNext = document.getElementById('btn-galeria-next');
-    
-    const subCards = document.querySelectorAll('.sub-card-mixta');
-    const totalSubCards = subCards.length;
-    
-    if (track && btnPrev && btnNext && totalSubCards > 0) {
-        let posicionActual = 0; 
+    // ==================== CÓDIGO DEL CARRUSEL (CARD 4) ====================
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    let autoSlideInterval;
 
-        function actualizarCarrusel() {
-            // CORRECCIÓN MATEMÁTICA: Como el track mide 400%, cada tarjeta mide el 25% de la tira completa.
-            // Al multiplicar la posición actual por -25%, el carrusel avanza exactamente una tarjeta a la vez de forma perfecta.
-            const porcentajeDesplazamiento = posicionActual * 25;
-            track.style.transform = `translateX(-${porcentajeDesplazamiento}%)`;
+    function showSlide(index) {
+        // Asegura que el índice de la diapositiva rote cíclicamente
+        if (index >= slides.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide = index;
         }
 
-        btnNext.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            if (posicionActual < totalSubCards - 1) {
-                posicionActual++; 
+        // Remueve y agrega la clase active para mostrar el elemento deseado
+        slides.forEach((slide, i) => {
+            if (i === currentSlide) {
+                slide.classList.add('active');
             } else {
-                posicionActual = 0; 
+                slide.classList.remove('active');
             }
-            actualizarCarrusel();
         });
 
-        btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-            if (posicionActual > 0) {
-                posicionActual--; 
+        // Actualiza el estado de los indicadores de puntos
+        dots.forEach((dot, i) => {
+            if (i === currentSlide) {
+                dot.classList.add('active');
             } else {
-                posicionActual = totalSubCards - 1; 
+                dot.classList.remove('active');
             }
-            actualizarCarrusel();
+        });
+    }
+
+    // Eventos para botones flechas
+    if (nextBtn && prevBtn) {
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+            resetAutoSlide();
         });
 
-        window.addEventListener('resize', actualizarCarrusel);
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+            resetAutoSlide();
+        });
+    }
+
+    // Eventos para interactuar con los puntos indicadores
+    dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-slide'));
+            showSlide(index);
+            resetAutoSlide();
+        });
+    });
+
+    // Desplazamiento automático cada 5 segundos
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    // Iniciar temporizador automático
+    if (slides.length > 0) {
+        startAutoSlide();
     }
 });
